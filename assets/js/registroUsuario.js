@@ -9,6 +9,8 @@ document.getElementById("register-form").addEventListener("submit",async(e)=>{
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
+      /* Aca tienes que enviar los mismos valores que estan en el formulario de registro
+      Revisa el archivo "registro.controller.js" linea 7 */
       user: e.target.children.user.value,
       email: e.target.children.email.value,
       password: e.target.children.password.value,
