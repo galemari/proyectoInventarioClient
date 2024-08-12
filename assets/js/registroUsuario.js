@@ -72,6 +72,7 @@ document
         },
         body: JSON.stringify({ nombre, apellido, email, password }),
       });
+      //Cuando el email ya existe, el servidor responde con un json con un "msg"
       console.log(await res.json());
 
       console.log("Response status:", res.status);
