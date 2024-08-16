@@ -11,8 +11,6 @@ $(document).ready(function() {
       var password = $('#password').val();
       var nombre = $('#nombre').val();
       var apellido = $('#apellido').val();
-      
-      
 
       if (!validEmail.test(email)) {
           alert('Email inválido, no se puede enviar el registro');
@@ -35,27 +33,18 @@ $(document).ready(function() {
       }
 
       alert('Formulario válido, enviando...');
-      // Aquí puedes continuar con el envío del formulario
-      // this.submit(); // Descomenta esta línea si deseas enviar el formulario
   });
 });
+
 const mensajeError = document.getElementsByClassName("error")[0];
 
 document.getElementById("register-form").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  // Logging for debugging
-  console.log("Form submitted");
-
   const nombre = e.target.nombre.value;
   const apellido = e.target.apellido.value;
   const email = e.target.email.value;
   const password = e.target.password.value;
-
-  console.log("nombre:", nombre);
-  console.log("apellido:", apellido);
-  console.log("email:", email);
-  console.log("password:", password);
 
   try {
     const res = await fetch("http://localhost:3000/apiV1/registrar", {
@@ -66,25 +55,17 @@ document.getElementById("register-form").addEventListener("submit", async (e) =>
       body: JSON.stringify({ nombre, apellido, email, password }),
     });
 
-    console.log("Response status:", res.status);
-
-    if (!res.ok) {
-      // Log the response if not ok
-      console.error("Failed to register:", res.statusText);
-      return mensajeError.classList.remove("escondido");
-    }
-
-    const resJson = await res.json();
-
-    console.log("Response JSON:", resJson);
-
-    if (resJson.redirect) {
-      window.location.href = resJson.redirect;
+    if (res.ok) {
+      // Redirigir a la página index.html si el registro fue exitoso
+      window.location.href = "index.html";
+    } else {
+      mensajeError.classList.remove("escondido");
     }
   } catch (error) {
     console.error("Error:", error);
     mensajeError.classList.remove("escondido");
   }
 });
+
 
 //1 conectar registro, login a base de datos, crear,editar,eliminar producto 
